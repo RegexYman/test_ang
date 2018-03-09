@@ -1,0 +1,93 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            114.15524172219,
+            22.285995012189
+          ],
+          [
+            114.1535339859,
+            22.28686610553
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "STREET": "PORTOLA",
+        "PCI": "99",
+        "ROAD_SATURATION_LEVEL": "TRAFFIC AVERAGE",
+        "TRAFFIC_SPEED": "27"
+      }
+    },
+    {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            114.15631030697,
+            22.28514247854
+          ],
+          [
+            114.15524172219,
+            22.285995012189
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "STREET": "PORTOLA",
+        "PCI": "99",
+        "ROAD_SATURATION_LEVEL": "TRAFFIC AVERAGE",
+        "TRAFFIC_SPEED": "27"
+      }
+    },
+	{
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            114.16553341626,
+            22.279578036432
+          ],
+          [
+            114.16377813521,
+            22.280706788759
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "STREET": "PORTOLA",
+        "PCI": "99",
+        "ROAD_SATURATION_LEVEL": "TRAFFIC AVERAGE",
+        "TRAFFIC_SPEED": "27"
+      }
+    },
+	{
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            114.16799345984,
+            22.279635994023
+          ],
+          [
+            114.16553341626,
+            22.279578036432
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "STREET": "PORTOLA",
+        "PCI": "99",
+        "ROAD_SATURATION_LEVEL": "TRAFFIC AVERAGE",
+        "TRAFFIC_SPEED": "27"
+      }
+    }
+  ]
+}

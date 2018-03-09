@@ -1,0 +1,56 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.469886,
+            37.736112
+          ],
+          [
+            -122.470949,
+            37.73522
+          ],
+          [
+            -122.471274,
+            37.734916
+          ],
+          [
+            -122.471569,
+            37.734707
+          ]
+        ]
+      },
+      "type": "Feature",
+      "properties": {
+        "STNME_GC": "PORTOLA DR",
+        "LF_FADD": 0,
+        "CLASSCODE": "3",
+        "RT_FADD": 1600,
+        "Functional_Class": "Arterial",
+        "On Street": "PORTOLA DR",
+        "JURISDICTI": "DPW",
+        "LF_TOADD": 0,
+        "STREET": "PORTOLA",
+        "CNN": 15106103,
+        "ACCEPTED": "Y",
+        "RT_TOADD": 1698,
+        "NHOOD": "Saint Francis Wood",
+        "From Street": "SAN FERNANDO WAY",
+        "ZIP_CODE": "94127",
+        "LAYER": "STREETS",
+        "DISTRICT": "07",
+        "ST_TYPE": "DR",
+        "CNNTEXT": "15106103",
+        "F_NODE_CNN": 22939000,
+        "PCI": "99",
+        "T_NODE_CNN": 23141000,
+        "To Street": "JUNIPERO SERRA BLVD \\ SAINT FRANCIS BLVD \\ SLOAT BLVD \\ WEST PORTAL AVE",
+        "STREETNAME": "PORTOLA DR",
+        "STREET_GC": "PORTOLA"
+      }
+    }
+  ]
+}
