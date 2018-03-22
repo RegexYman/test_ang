@@ -15,6 +15,9 @@ var insertApiData= require('./routes/insertApiData');
 var getTrafficSpeeds = require('./routes/getTrafficSpeeds');
 var getTrafficStat = require('./routes/getTrafficStat');
 var getTrafficSpeedByLID = require('./routes/getTrafficSpeedByLID');
+var getGeoByLID = require('./routes/getGeoByLID');
+var getGeoByLocation = require('./routes/getGeoByLocation');
+var getJourneyTime = require('./routes/getJourneyTime');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fyp_test');
@@ -44,6 +47,9 @@ app.use('/insertApiData', insertApiData);
 app.use('/getTrafficSpeeds', getTrafficSpeeds);
 app.use('/getTrafficStat',getTrafficStat);
 app.use('/getTrafficSpeedByLID',getTrafficSpeedByLID);
+app.use('/getGeoByLID',getGeoByLID);
+app.use('/getGeoByLocation',getGeoByLocation);
+app.use('/getJourneyTime',getJourneyTime);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
