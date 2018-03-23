@@ -8,6 +8,7 @@ var startTime;
 
 
 router.post('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
     startTime = Date.now();
     console.log(startTime);
     var datetime = req.body.datetime;

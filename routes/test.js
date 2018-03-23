@@ -1,63 +1,20 @@
-var express = require('express');
-var router = express.Router();
-var convert = require('xml-js');
-var http = require("http");
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
+getIdsByDistrict("東區");
 
-
-router.post('/', function (req, res, next) {
-    let { street_name, district, region} = req.body;
-    if (street_name != null && street_name != "") {
-        var query = {
-            Street_Name: street_name
-        };
-        var match = {
-            $match: {
-                Street_Name: street_name
-            }
-        };
-        getIdsByDistrict(query,match,res);
-    } else if (district != null && district != "") {
-        var query = {
-            District : district
-        };
-        var match = {
-            $match: {
-                District: district
-            }
-        };
-        getIdsByDistrict(query,match,res);
-    } else if (region != null && region != "") {
-        var query = {
-            Region : region
-        };
-        var match = {
-            $match: {
-                Region: region
-            }
-        };
-        getIdsByDistrict(query,match,res);
-    } else{
-        res.json({success:false,message:"parameter error"});
-    }
-});
-
-function getIdsByDistrict(query, match, res) {
-    // console.log(query);
+function getIdsByDistrict(district) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("fyp_test");
-        // var query = { District: district };
+        var query = { District: district };
         dbo.collection("tsm_geo").find(query).toArray()
             .then(result => {
                 if (result.length == 0) {
-                    res.json({success:false,message:"no geo record"});
+                    
                 } else {
-                    getDataByID(match).then(datas => {
-                        res.json(datas);
-                        // console.log(datas);
+                    getDataByID(district).then(datas=>{
+                        console.log(datas);
                     })
                     dbo.close();
                 }
@@ -65,7 +22,7 @@ function getIdsByDistrict(query, match, res) {
     });
 }
 
-function getDataByID(match) {
+function getDataByID(lID) {
     return new Promise((resolve, reject) => {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
@@ -79,11 +36,11 @@ function getDataByID(match) {
                         as: "informations"
                     }
             };
-            // var match = {
-            //     $match: {
-            //         District: lID
-            //     }
-            // };
+            var match = {
+                $match: {
+                    District: lID
+                }
+            };
             var proj = {
                 $project:
                     {
@@ -95,9 +52,9 @@ function getDataByID(match) {
             };
             dbo.collection("tsm_geo").aggregate([aggr, match]).toArray()
                 .then((result) => {
-                    if (result.length == 0) {
-                        resolve({ success: false, message: "No geo record" });
-                    } else {
+                    if(result.length == 0){
+                        resolve({success:false,message:"No geo record"});
+                    }else{
                         var a = [];
                         for (var i = 0; i < result.length; i++) {
                             var tsmResult = result[i].informations[0];
@@ -124,6 +81,5 @@ function getDataByID(match) {
                 });
         });
     });
-}
 
-module.exports = router;
+}
