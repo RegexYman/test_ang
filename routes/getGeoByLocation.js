@@ -79,11 +79,6 @@ function getDataByID(match) {
                         as: "informations"
                     }
             };
-            // var match = {
-            //     $match: {
-            //         District: lID
-            //     }
-            // };
             var proj = {
                 $project:
                     {

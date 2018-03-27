@@ -20,6 +20,12 @@ router.post('/', function(req, res, next) {
     var min = req.body.minute;
     var region = req.body.region;
     var result = null;
+    var latest = req.body.latest;
+    if(latest != true || latest != false){
+
+    }else{
+        
+    }
     if(datetime != null && datetime!="*"){
         if(datetime.charAt(4) == "-" && datetime.charAt(7) == "-" && datetime.charAt(10) == "T" && datetime.charAt(13) == ":"){
             result = getDataByDatetimeFormat(res,datetime+":35",region);
