@@ -26,7 +26,7 @@ var getAverageSpeedDay = require('./routes/getAverageSpeedDay');
 var getAverageSpeedMonth = require('./routes/getAverageSpeedMonth');
 var insertTrafficSpeedSimu = require('./routes/insertTrafficSpeedSimu');
 var getTrafficSpeedSimu = require('./routes/getTrafficSpeedSimu');
-
+var getRawTrafficSpeed = require('./routes/getRawTrafficSpeed');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fyp_test');
@@ -69,6 +69,8 @@ app.use('/getAverageSpeedDay',getAverageSpeedDay);
 app.use('/getAverageSpeedMonth',getAverageSpeedMonth);
 app.use('/insertTrafficSpeedSimu',insertTrafficSpeedSimu);
 app.use('/getTrafficSpeedSimu',getTrafficSpeedSimu);
+app.use('/getRawTrafficSpeed',getRawTrafficSpeed);
+app.use('/getForecast',getForecast);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

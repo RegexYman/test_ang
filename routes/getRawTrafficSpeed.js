@@ -8,29 +8,66 @@ var url = "mongodb://localhost:27017/";
 
 router.post('/', function(req, res, next) {
     var lID = req.body.link_ID;
+    var yyyy = req.body.yyyy;
+    var mm = req.body.mm;
+    var dd = req.body.dd;
     var captureDate = req.body.capture_date;
     var latest = req.body.latest;
-    if(lID != null && lID != ""){
-        if(captureDate != null && captureDate != ""){
-            if(captureDate.charAt(4) == "-" && captureDate.charAt(7) == "-" && captureDate.charAt(10) == "T" && captureDate.charAt(13) == ":"){
-                getStatusByLIDandDate(res,lID,captureDate);
+    if(yyyy != null && mm != null && dd != null && lID != null){
+        regexSearch(res,yyyy,mm,dd,lID);
+    } else{
+        if(lID != null && lID != ""){
+            if(captureDate != null && captureDate != ""){
+                if(captureDate.charAt(4) == "-" && captureDate.charAt(7) == "-" && captureDate.charAt(10) == "T" && captureDate.charAt(13) == ":"){
+                    getStatusByLIDandDate(res,lID,captureDate);
+                }else{
+                    res.json({sucess: false, message:"date time format error"});
+                }
+            }else if(latest != null && latest != ""){
+                if(latest == true || latest == "true"){
+                    getLatestStatusByLID(res,lID);
+                }else{
+                    getOldestStatusByID(res,lID);
+                }
             }else{
-                res.json({sucess: false, message:"date time format error"});
-            }
-        }else if(latest != null && latest != ""){
-            if(latest == true || latest == "true"){
-                getLatestStatusByLID(res,lID);
-            }else{
-                getOldestStatusByID(res,lID);
+                //"3006-30069"
+                getStatusByLID(res,lID);
             }
         }else{
-            //"3006-30069"
-            getStatusByLID(res,lID);
+            res.json({success: false, message: "please enter link id"});
         }
-    }else{
-        res.json({success: false, message: "please enter link id"});
     }
 });
+
+function regexSearch(res,yyyy,mm,dd,linkID){
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("fyp_test");
+        var query = {'jtis_speedlist.jtis_speedmap.CAPTURE_DATE._text':{$regex: yyyy+"-"+mm+"-"+dd+".*"}};
+        console.log(query);
+        dbo.collection("Raw_SpeedMap").find(query).toArray(function (err, result) {
+            // console.log(result);
+            if (err) {
+                throw err;
+            }
+            if (result.length == 0) {
+                var jsonResult = {message:"no record found",result:""};
+                res.json(jsonResult);
+            } else {
+                var finalResult = new Array();
+                for(var i = 0 ; i < result.length ; i++){
+                    for(var j = 0 ; j < result[i].jtis_speedlist.jtis_speedmap.length ; j++){
+                        if(result[i].jtis_speedlist.jtis_speedmap[j].LINK_ID._text == linkID){
+                            finalResult.push(result[i].jtis_speedlist.jtis_speedmap[j]);
+                        }
+                    }
+                }
+                res.json(finalResult);
+            }
+            db.close();
+        });
+    });
+}
 
 function getStatusByLID(res,linkID){
     MongoClient.connect(url, function (err, db) {
