@@ -19,6 +19,14 @@ var getTrafficSpeedByLID = require('./routes/getTrafficSpeedByLID');
 var getGeoByLID = require('./routes/getGeoByLID');
 var getGeoByLocation = require('./routes/getGeoByLocation');
 var getJourneyTime = require('./routes/getJourneyTime');
+var getAccident = require('./routes/getAccident');
+var getForecast = require('./routes/getForecast');
+var getAverageSpeedHour = require('./routes/getAverageSpeedHour');
+var getAverageSpeedDay = require('./routes/getAverageSpeedDay');
+var getAverageSpeedMonth = require('./routes/getAverageSpeedMonth');
+var insertTrafficSpeedSimu = require('./routes/insertTrafficSpeedSimu');
+var getTrafficSpeedSimu = require('./routes/getTrafficSpeedSimu');
+
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fyp_test');
@@ -55,6 +63,12 @@ app.use('/getTrafficSpeedByLID',getTrafficSpeedByLID);
 app.use('/getGeoByLID',getGeoByLID);
 app.use('/getGeoByLocation',getGeoByLocation);
 app.use('/getJourneyTime',getJourneyTime);
+app.use('/getAccident',getAccident);
+app.use('/getAverageSpeedHour',getAverageSpeedHour);
+app.use('/getAverageSpeedDay',getAverageSpeedDay);
+app.use('/getAverageSpeedMonth',getAverageSpeedMonth);
+app.use('/insertTrafficSpeedSimu',insertTrafficSpeedSimu);
+app.use('/getTrafficSpeedSimu',getTrafficSpeedSimu);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

@@ -8,9 +8,8 @@ var dd = today.getDate().toString();
 var mm = (today.getMonth() + 1).toString(); //January is 0!
 var yyyy = today.getFullYear().toString();
 var hh = today.getHours().toString();
-var hhCur = today.getHours().toString();
 var min = today.getMinutes().toString();
-hh = "" + hh - 1;
+
 if (mm.length == 1) {
     mm = "0" + mm
 }
@@ -21,15 +20,11 @@ if (hh.length == 1) {
     hh = "0" + hh;
 }
 if (min.length == 1) {
-    min = "0" + min;
-}
-if(hhCur.length == 1) {
-    hhCur = "0" + hhCur;
+    min = "0" + min
 }
 
 var vdate = yyyy + "-" + mm + "-" + dd + "T" + hh + "+:+.+:+.";
-var vdate2 = yyyy + "-" + mm + "-" + dd + "T" + hh;
-var gdate = yyyy + "-" + mm + "-" + dd + "T" + hhCur + ":"+ min ;
+var vdate2 = yyyy + "-" + mm + "-" + dd + "T" + hh + ":"+ min ;
 
 console.log(vdate);
 console.log(vdate2);
@@ -52,9 +47,8 @@ function getLinkIDlist() {
             } else {
                 looper(result).then((list)=>{
                     averageCalculator(list, result, result.length).then((next)=>{
-                        var j = {hour : ""+hh , record_date : vdate2, generation_date : gdate , generation_date_long: ""+today}
+                        var j = {hour : hh , generation_date : vdate2, generation_date_long: ""+today}
                         j.hour_speed_average = next;
-                        // console.log(j);
                         insertIntoDB(j);
                     })
                 });
@@ -77,11 +71,9 @@ function looper(result) {
 function averageCalculator(list, resultSet, amount) {
     console.log("amount: " + amount);
     return new Promise((resolve, reject)=> {
-        // var finalJson = {};
-        var finalList = [];
+        var finalJson = [];
         // console.log(resultSet[0].jtis_speedlist.jtis_speedmap[0].TRAFFIC_SPEED._text);
         for(var i = 0 ; i < list.length ; i++){
-            var finalJson = {};
             var temp = list[i];
             var temp2 = 0;
             for(var j = 0 ; j < resultSet.length; j++){
@@ -91,10 +83,9 @@ function averageCalculator(list, resultSet, amount) {
                     }
                 }
             }
-            finalJson = {LINK_ID : temp ,values: (temp2/amount).toFixed(1)};
-            finalList.push(finalJson);
+            finalJson.push((temp2/amount).toFixed(1));
         }
-        resolve(finalList);
+        resolve(finalJson);
     })
 }
 

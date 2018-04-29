@@ -45,9 +45,10 @@ router.post('/', function (req, res, next) {
                 console.log(findTrafficSpeedObj);
                 dbo.collection("Raw_SpeedMap").find(findTrafficSpeedObj).toArray()
                     .then((result2) => {
+                        // console.log(result2);
                         // console.log(result2.jtis_speedlist.jtis_speedmap[0]);
                         var preResult = result2[result2.length - 1];
-                        console.log(preResult.jtis_speedlist.jtis_speedmap[0].CAPTURE_DATE._text)
+                        // console.log(preResult);
                         var finalResult;
                         for (var i = 0; i < preResult.jtis_speedlist.jtis_speedmap.length; i++) {
                             if (preResult.jtis_speedlist.jtis_speedmap[i].LINK_ID._text == result[0].Link_ID) {
