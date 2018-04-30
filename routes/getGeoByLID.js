@@ -23,13 +23,14 @@ function getTotalinfo(lID,res){
             Street_Number : geoResult.Street_Number,
             Street_Name : geoResult.Street_Name,
             District_detial : geoResult.District,
-            Region_eng : tsmResult.District,
+            Region_eng : tsmResult.Region,
             Region_chi : geoResult.Region,
-            Start_Point : tsmResult.Start_Point,
-            Start_Longitude : tsmResult.Start_Longitude,
-            Start_Latitude : tsmResult.Start_Latitude,
-            End_Point : tsmResult.End_Point,
-            End_Longitude : tsmResult.End_Longitude,
+            Start_Point : tsmResult.Start_Node,
+            Start_Longitude : tsmResult.Start_Node_Eastings,
+            Start_Latitude : tsmResult.Start_Node_Northings,
+            End_Point : tsmResult.End_Node,
+            End_Longitude : tsmResult.End_Node_Eastings,
+            End_Latitude : tsmResult.End_Node_Northings,
             Road_Type : tsmResult.Road_Type
         }
         res.json(result);
@@ -44,7 +45,7 @@ function getTsmInfo(lID){
             if (err) throw err;
             var dbo = db.db("fyp_test");
             var query = {Link_ID: lID};
-            dbo.collection("tsm_link_info").find(query).toArray(function (err, result) {
+            dbo.collection("tsm_info").find(query).toArray(function (err, result) {
                 if (err) {
                     throw err;
                 }

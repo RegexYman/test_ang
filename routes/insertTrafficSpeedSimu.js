@@ -13,7 +13,7 @@ router.post('/', function (req, res, next) {
             MongoClient.connect(url, function(err, db) {
                 if (err) throw err;
                 var json = {
-                    date : today,
+                    date : ""+today,
                     traffic_amount : amount
                 };
                 var dbo = db.db("fyp_test");
